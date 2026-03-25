@@ -760,37 +760,48 @@
 
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-    // RSVP submit — sends to abdooztv@gmail.com
-    function handleRSVP() {
+    // RSVP submit — posts to Formspree → abdooztv@gmail.com
+    async function handleRSVP() {
       const fname     = document.getElementById('fname').value.trim();
       const attending = document.getElementById('attending').value;
 
       if (!fname)     { highlight('fname');     return; }
       if (!attending) { highlight('attending'); return; }
 
-      const name    = `${fname} ${document.getElementById('lname').value.trim()}`.trim();
-      const email   = document.getElementById('email').value.trim();
-      const guests  = document.getElementById('guests').value;
-      const message = document.getElementById('msg').value.trim();
+      const btn = document.querySelector('.form-btn');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
 
-      // Show success immediately
-      document.getElementById('form').style.display = 'none';
-      document.getElementById('success').classList.add('visible');
+      const payload = {
+        name:      `${fname} ${document.getElementById('lname').value.trim()}`.trim(),
+        email:     document.getElementById('email').value.trim() || 'not provided',
+        attending,
+        guests:    document.getElementById('guests').value,
+        message:   document.getElementById('msg').value.trim() || '—',
+        _subject:  `RSVP — Isabel & Ramy's Wedding`,
+      };
 
-      // Compose email to the couple
-      const subject = encodeURIComponent(`RSVP from ${name} — Isabel & Ramy's Wedding`);
-      const body    = encodeURIComponent(
-        `New RSVP received!\n\n` +
-        `Name: ${name}\n` +
-        `Email: ${email || 'not provided'}\n` +
-        `Attending: ${attending}\n` +
-        `Guests: ${guests}\n` +
-        (message ? `Message: ${message}\n` : '')
-      );
+      try {
+        const res = await fetch('https://formspree.io/f/xdkoqyzw', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body:    JSON.stringify(payload),
+        });
 
-      setTimeout(() => {
-        window.open(`mailto:abdooztv@gmail.com?subject=${subject}&body=${body}`, '_blank');
-      }, 800);
+        if (res.ok) {
+          document.getElementById('form').style.display = 'none';
+          document.getElementById('success').classList.add('visible');
+        } else {
+          const data = await res.json();
+          alert('Something went wrong: ' + (data.error || 'please try again.'));
+          btn.textContent = 'Confirm Attendance';
+          btn.disabled = false;
+        }
+      } catch (err) {
+        alert('Network error — please check your connection and try again.');
+        btn.textContent = 'Confirm Attendance';
+        btn.disabled = false;
+      }
     }
 
     function highlight(id) {
