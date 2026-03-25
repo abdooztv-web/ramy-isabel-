@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Isabel &amp; Ramy — 13 April</title>
+  <title>Isabel &amp; Leon — 13 April</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
@@ -288,119 +288,197 @@
     .g-item--wide   { grid-column: span 2; aspect-ratio: 16/9; }
     .g-item--square { aspect-ratio: 3/4; }
 
-    /* ── VENUE ───────────────────────────────────────────── */
-    .venue-section {
-      min-height: 100dvh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .venue-photo {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .venue-photo img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
-
-    .venue-photo::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, var(--bg) 0%, transparent 35%);
-      z-index: 1;
-    }
-
-    .venue-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    /* ── RSVP ────────────────────────────────────────────── */
+    .rsvp-section {
       padding: 8rem 5rem;
+      max-width: 860px;
+      margin: 0 auto;
     }
 
-    .venue-title {
+    .rsvp-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 4vw, 4.5rem);
+      font-size: clamp(3rem, 5vw, 5rem);
       font-weight: 300;
       line-height: 1;
       letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
 
-    .venue-title em {
-      font-style: italic;
-      color: var(--gold-light);
-      display: block;
+    .rsvp-sub {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      line-height: 1.7;
     }
 
-    .venue-rule {
-      width: 3rem; height: 1px;
-      background: var(--gold);
-      margin: 1.75rem 0;
-    }
+    .form { display: flex; flex-direction: column; gap: 1.25rem; }
 
-    .venue-facts {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-bottom: 2.5rem;
-    }
-
-    .venue-fact {
-      padding: 1.4rem 0;
-      border-bottom: 1px solid var(--border);
+    .form-row {
       display: grid;
-      grid-template-columns: 5.5rem 1fr;
-      gap: 1.5rem;
-      align-items: start;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
     }
 
-    .venue-fact:first-child { border-top: 1px solid var(--border); }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
 
-    .venue-fact__label {
+    .form-label {
       font-size: 0.62rem;
-      letter-spacing: 0.24em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--muted);
-      padding-top: 0.25rem;
     }
 
-    .venue-fact__value {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 300;
-      line-height: 1.35;
-    }
-
-    .venue-fact__value small {
-      display: block;
+    .form-input,
+    .form-select,
+    .form-textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.375rem;
+      color: var(--ivory);
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-top: 0.3rem;
+      font-size: 0.88rem;
+      padding: 0.875rem 1rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+      -webkit-appearance: none;
+      appearance: none;
     }
 
-    .venue-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
+    .form-input::placeholder,
+    .form-textarea::placeholder { color: var(--muted); opacity: 0.6; }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus { border-color: rgba(201,169,110,0.6); }
+
+    .form-select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%237a6e61' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+
+    .form-select option { background: #181614; color: var(--ivory); }
+
+    .form-textarea { resize: none; height: 5.5rem; }
+
+    .form-btn {
+      margin-top: 0.5rem;
       align-self: flex-start;
-      padding: 0.9rem 2rem;
+      padding: 0.9rem 2.5rem;
       background: var(--gold);
       color: var(--bg);
+      border: none;
       border-radius: 0.375rem;
       font-family: 'DM Sans', sans-serif;
       font-size: 0.72rem;
       font-weight: 500;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      text-decoration: none;
+      cursor: pointer;
       transition: background 0.25s ease, transform 0.25s cubic-bezier(0.16,1,0.3,1);
     }
 
-    .venue-btn:hover  { background: var(--gold-light); transform: translateY(-2px); }
+    .form-btn:hover  { background: var(--gold-light); transform: translateY(-2px); }
+    .form-btn:active { transform: translateY(0); }
+
+    .form-success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 3rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      text-align: center;
+    }
+
+    .form-success.visible { display: flex; }
+
+    .form-success h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 300;
+    }
+
+    .form-success p { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── VENUE ───────────────────────────────────────────── */
+    .venue-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+      border-top: 1px solid var(--border);
+    }
+
+    .venue-map {
+      position: relative;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .venue-map iframe {
+      width: 100%; height: 100%;
+      border: none;
+      display: block;
+      filter: grayscale(30%) contrast(1.05);
+      min-height: 420px;
+    }
+
+    .venue-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem;
+      border-left: 1px solid var(--border);
+    }
+
+    .venue-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .venue-name em {
+      font-style: italic;
+      color: var(--gold-light);
+      display: block;
+    }
+
+    .venue-address {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+
+    .venue-address strong { color: var(--ivory); font-weight: 400; }
+
+    .venue-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      align-self: flex-start;
+      padding: 0.9rem 2rem;
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      border-radius: 0.375rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s ease, color 0.25s ease, transform 0.25s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .venue-btn:hover  { background: var(--gold); color: var(--bg); transform: translateY(-2px); }
     .venue-btn:active { transform: translateY(0); }
 
     /* ── FOOTER ──────────────────────────────────────────── */
@@ -470,14 +548,15 @@
       .g-item--tall  { min-height: 280px; }
       .g-item--wide  { grid-column: span 2; aspect-ratio: 4/3; }
 
-      .rsvp-section {
+      .rsvp-section  { padding: 5rem 1.75rem; }
+      .form-row      { grid-template-columns: 1fr; }
+
+      .venue-section {
         grid-template-columns: 1fr;
-        min-height: auto;
       }
 
-      .rsvp-photo    { height: 45dvh; }
-      .rsvp-content  { padding: 4rem 1.75rem 6rem; }
-      .form-row      { grid-template-columns: 1fr; }
+      .venue-map iframe { min-height: 300px; }
+      .venue-info { padding: 3rem 1.75rem; border-left: none; border-top: 1px solid var(--border); }
 
       footer {
         padding: 3rem 1.75rem;
@@ -493,13 +572,13 @@
   <!-- ── HERO ─────────────────────────────────────────────── -->
   <section class="hero">
     <div class="hero__photo">
-      <img src="IMG_5151.JPG.jpeg" alt="Isabel and Ramy at the Louvre, Paris">
+      <img src="IMG_5151.JPG.jpeg" alt="Isabel and Leon at the Louvre, Paris">
     </div>
     <div class="hero__content">
       <p class="hero__eyebrow">You are invited</p>
       <h1 class="hero__names">
         Isabel<br>
-        <em>&amp; Ramy</em>
+        <em>&amp; Leon</em>
       </h1>
       <div class="hero__rule"></div>
       <div class="hero__meta">
@@ -529,7 +608,7 @@
         <span class="detail__label">Date</span>
         <div class="detail__value">
           Sunday<br>13th April
-          <small>2026</small>
+          <small>2025</small>
         </div>
       </div>
       <div class="detail">
@@ -556,87 +635,118 @@
     </div>
     <div class="gallery__grid">
       <div class="g-item g-item--tall reveal delay-1">
-        <img src="IMG_5152.JPG.jpeg" alt="Isabel and Ramy in the French countryside">
+        <img src="IMG_5152.JPG.jpeg" alt="Isabel and Leon in the French countryside">
       </div>
       <div class="g-item g-item--square reveal delay-2">
-        <img src="IMG_5153.JPG.jpeg" alt="Isabel and Ramy at the Pyramids of Giza">
+        <img src="IMG_5153.JPG.jpeg" alt="Isabel and Leon at the Pyramids of Giza">
       </div>
       <div class="g-item g-item--square reveal delay-3">
-        <img src="IMG_5155.JPG.jpeg" alt="Isabel and Ramy at the beach">
+        <img src="IMG_5155.JPG.jpeg" alt="Isabel and Leon at the beach">
       </div>
       <div class="g-item g-item--wide reveal delay-4">
-        <img src="IMG_5156.JPG.jpeg" alt="Isabel and Ramy in Bali">
+        <img src="IMG_5156.JPG.jpeg" alt="Isabel and Leon in Bali">
       </div>
     </div>
   </section>
 
   <!-- ── RSVP ──────────────────────────────────────────────── -->
   <section class="rsvp-section" id="rsvp">
-    <div class="rsvp-photo">
-      <img src="WhatsApp Image 2026-03-25 at 7.59.36 PM.jpeg" alt="Isabel and Ramy">
+    <p class="section-label reveal">Will you join us?</p>
+    <h2 class="rsvp-title reveal delay-1">RSVP</h2>
+    <p class="rsvp-sub reveal delay-2">
+      We'd love to celebrate with you — let us know if you can make it.<br>
+      Your response will be sent directly to the couple.
+    </p>
+
+    <div class="form" id="form">
+      <div class="form-row reveal delay-3">
+        <div class="form-group">
+          <label class="form-label" for="fname">First name</label>
+          <input class="form-input" type="text" id="fname" placeholder="Your first name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="lname">Last name</label>
+          <input class="form-input" type="text" id="lname" placeholder="Your last name">
+        </div>
+      </div>
+      <div class="form-group reveal delay-3">
+        <label class="form-label" for="email">Your email</label>
+        <input class="form-input" type="email" id="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group reveal delay-4">
+        <label class="form-label" for="attending">Attending?</label>
+        <select class="form-select" id="attending">
+          <option value="" disabled selected>Select…</option>
+          <option value="Yes, I'll be there!">Yes, I'll be there!</option>
+          <option value="Sorry, can't make it">Sorry, can't make it</option>
+          <option value="Not sure yet">Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group reveal delay-4">
+        <label class="form-label" for="guests">Guests (including yourself)</label>
+        <select class="form-select" id="guests">
+          <option value="Just me">Just me</option>
+          <option value="2 guests">2 guests</option>
+          <option value="3 guests">3 guests</option>
+          <option value="4+ guests">4+ guests</option>
+        </select>
+      </div>
+      <div class="form-group reveal delay-5">
+        <label class="form-label" for="msg">Message (optional)</label>
+        <textarea class="form-textarea" id="msg" placeholder="Share a note with the couple…"></textarea>
+      </div>
+      <button class="form-btn reveal delay-5" onclick="handleRSVP()">
+        Confirm Attendance
+      </button>
     </div>
-    <div class="rsvp-content">
-      <p class="section-label reveal">Will you join us?</p>
-      <h2 class="rsvp-title reveal delay-1">RSVP</h2>
-      <p class="rsvp-sub reveal delay-2">Kindly let us know as soon as possible.<br>We can't wait to celebrate with you.</p>
 
-      <div class="form" id="form">
-        <div class="form-row reveal delay-3">
-          <div class="form-group">
-            <label class="form-label" for="fname">First name</label>
-            <input class="form-input" type="text" id="fname" placeholder="Your first name">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="lname">Last name</label>
-            <input class="form-input" type="text" id="lname" placeholder="Your last name">
-          </div>
-        </div>
-        <div class="form-group reveal delay-3">
-          <label class="form-label" for="email">Email</label>
-          <input class="form-input" type="email" id="email" placeholder="your@email.com">
-        </div>
-        <div class="form-group reveal delay-4">
-          <label class="form-label" for="attending">Attending?</label>
-          <select class="form-select" id="attending">
-            <option value="" disabled selected>Select…</option>
-            <option value="yes">Yes, I'll be there!</option>
-            <option value="no">Sorry, can't make it</option>
-            <option value="maybe">Not sure yet</option>
-          </select>
-        </div>
-        <div class="form-group reveal delay-4">
-          <label class="form-label" for="guests">Guests (including yourself)</label>
-          <select class="form-select" id="guests">
-            <option value="1">Just me</option>
-            <option value="2">2 guests</option>
-            <option value="3">3 guests</option>
-            <option value="4">4+ guests</option>
-          </select>
-        </div>
-        <div class="form-group reveal delay-5">
-          <label class="form-label" for="msg">Message (optional)</label>
-          <textarea class="form-textarea" id="msg" placeholder="Share a note with the couple…"></textarea>
-        </div>
-        <button class="form-btn reveal delay-5" onclick="handleRSVP()">
-          Confirm Attendance
-        </button>
-      </div>
+    <div class="form-success" id="success">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+        <circle cx="18" cy="18" r="17" stroke="#c9a96e" stroke-width="1.2"/>
+        <path d="M11 18l5 5 9-9" stroke="#c9a96e" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3>Thank you!</h3>
+      <p>We've received your RSVP and can't wait to celebrate with you.</p>
+    </div>
+  </section>
 
-      <div class="form-success" id="success">
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-          <circle cx="18" cy="18" r="17" stroke="#c9a96e" stroke-width="1.2"/>
-          <path d="M11 18l5 5 9-9" stroke="#c9a96e" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- ── VENUE ─────────────────────────────────────────────── -->
+  <section class="venue-section">
+    <div class="venue-map">
+      <iframe
+        src="https://maps.google.com/maps?q=The+Grove+Venue+Suez+Road+km+34+Madinaty+Cairo+Egypt&output=embed&hl=en&z=15"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="The Grove Wedding Venue location">
+      </iframe>
+    </div>
+    <div class="venue-info reveal">
+      <p class="section-label">Getting there</p>
+      <h2 class="venue-name">The Grove<br><em>Wedding Venue</em></h2>
+      <p class="venue-address">
+        <strong>طريق السويس الكيلو 34</strong><br>
+        امام مدينتي المستقبل<br>
+        Cairo Governorate, Egypt<br><br>
+        Located on the Suez Road, 34 km from Cairo — opposite Madinaty Future City.
+      </p>
+      <a class="venue-btn"
+         href="https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=eg&sa=X&geocode=KbUchRnRHVgUMfBKAv7oQUTV&daddr=%D8%B7%D8%B1%D9%8A%D9%82+%D8%A7%D9%84%D8%B3%D9%88%D9%8A%D8%B3+%D8%A7%D9%84%D9%83%D9%8A%D9%84%D9%88+34+%D8%A7%D9%85%D8%A7%D9%85+%D9%85%D8%AF%D9%8A%D9%86%D8%AA%D9%8A+%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D9%82%D8%A8%D9%84,+Cairo+Governorate"
+         target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4z"
+                stroke="currentColor" stroke-width="1.2" fill="none"/>
+          <circle cx="7" cy="5" r="1.2" fill="currentColor"/>
         </svg>
-        <h3>Thank you!</h3>
-        <p>We've received your RSVP and can't wait to see you there.</p>
-      </div>
+        Get Directions
+      </a>
     </div>
   </section>
 
   <!-- ── FOOTER ────────────────────────────────────────────── -->
   <footer>
-    <div class="footer-names">Isabel <span>&amp;</span> Ramy</div>
+    <div class="footer-names">Isabel <span>&amp;</span> Leon</div>
     <div class="footer-date">13 April &nbsp;·&nbsp; The Grove Wedding Venue</div>
   </footer>
 
@@ -650,55 +760,44 @@
 
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-    // RSVP submit
+    // RSVP submit — sends to abdooztv@gmail.com
     function handleRSVP() {
-      const fname    = document.getElementById('fname').value.trim();
+      const fname     = document.getElementById('fname').value.trim();
       const attending = document.getElementById('attending').value;
 
-      if (!fname) {
-        highlight('fname');
-        return;
-      }
-      if (!attending) {
-        highlight('attending');
-        return;
-      }
+      if (!fname)     { highlight('fname');     return; }
+      if (!attending) { highlight('attending'); return; }
 
-      const data = {
-        name:      `${fname} ${document.getElementById('lname').value.trim()}`,
-        email:     document.getElementById('email').value.trim(),
-        attending,
-        guests:    document.getElementById('guests').value,
-        message:   document.getElementById('msg').value.trim(),
-      };
+      const name    = `${fname} ${document.getElementById('lname').value.trim()}`.trim();
+      const email   = document.getElementById('email').value.trim();
+      const guests  = document.getElementById('guests').value;
+      const message = document.getElementById('msg').value.trim();
 
-      // Log for local use
-      console.log('[RSVP]', data);
+      // Show success immediately
+      document.getElementById('form').style.display = 'none';
+      document.getElementById('success').classList.add('visible');
 
-      // Store in localStorage so the couple can read it
-      const existing = JSON.parse(localStorage.getItem('rsvps') || '[]');
-      existing.push({ ...data, at: new Date().toISOString() });
-      localStorage.setItem('rsvps', JSON.stringify(existing));
-
-      // Show success
-      document.getElementById('form').style.display    = 'none';
-      document.getElementById('success').style.display = 'flex';
-
-      // Open mailto as a convenience
-      const sub  = encodeURIComponent(`RSVP — ${data.name}`);
-      const body = encodeURIComponent(
-        `Name: ${data.name}\nAttending: ${data.attending}\nGuests: ${data.guests}\nMessage: ${data.message}`
+      // Compose email to the couple
+      const subject = encodeURIComponent(`RSVP from ${name} — Isabel & Leon's Wedding`);
+      const body    = encodeURIComponent(
+        `New RSVP received!\n\n` +
+        `Name: ${name}\n` +
+        `Email: ${email || 'not provided'}\n` +
+        `Attending: ${attending}\n` +
+        `Guests: ${guests}\n` +
+        (message ? `Message: ${message}\n` : '')
       );
+
       setTimeout(() => {
-        window.location.href = `mailto:?subject=${sub}&body=${body}`;
-      }, 900);
+        window.open(`mailto:abdooztv@gmail.com?subject=${subject}&body=${body}`, '_blank');
+      }, 800);
     }
 
     function highlight(id) {
       const el = document.getElementById(id);
-      el.style.borderColor = 'rgba(201,169,110,0.7)';
+      el.style.borderColor = 'rgba(201,169,110,0.8)';
       el.focus();
-      setTimeout(() => el.style.borderColor = '', 1800);
+      setTimeout(() => el.style.borderColor = '', 2000);
     }
   </script>
 </body>
