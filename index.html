@@ -783,22 +783,22 @@
       };
 
       try {
-        const res = await fetch('https://formsubmit.co/ajax/ramyelgaafary@hotmail.com', {
+        const res = await fetch('https://api.web3forms.com/submit', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body:    JSON.stringify({
+            access_key: '1420c59e-f8d1-4146-9e07-4369fb2a526d',
+            from_name:  'Isabel & Ramy Wedding RSVP',
             ...payload,
-            _subject: "RSVP — Isabel & Ramy's Wedding",
-            _captcha: 'false',
           }),
         });
 
         const data = await res.json();
-        if (data.success === 'true' || data.success === true) {
+        if (res.ok && data.success) {
           document.getElementById('form').style.display = 'none';
           document.getElementById('success').classList.add('visible');
         } else {
-          alert('Error: ' + JSON.stringify(data));
+          alert('Error: ' + (data.message || JSON.stringify(data)));
           btn.textContent = 'Confirm Attendance';
           btn.disabled = false;
         }
